@@ -2,6 +2,7 @@
 
 SmartChart is a web-based health care records system built for a database course project. It models a small clinical portal where patients, providers, and administrative users interact with appointment, flowsheet, prescription, and medication data.
 
+Live site: https://betaweb.csug.rochester.edu/~mkhan35/betaweb/
 
 ## Overview
 
@@ -16,6 +17,7 @@ The application uses PHP endpoints to load and update data from MySQL, with HTML
 - Provider workflow for adding observations and prescriptions
 - Drug interaction warning support using medication interaction data
 - MySQL schema and load scripts based on the project dataset
+- Betaweb deployment using PHP and MySQL
 
 ## Technologies
 
@@ -52,4 +54,3 @@ http://localhost:8004
 ├── schema/       Original project schema reference
 └── index.html    Login and role selection entry point
 ```
-

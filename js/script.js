@@ -711,7 +711,7 @@ function wireAppointmentRequest() {
   specialty.addEventListener("change", fillProviders);
   fillProviders();
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const params = new URLSearchParams(window.location.search);
     const patientId = params.get("patientId") || smartChartData.patients[0]?.id;
@@ -722,6 +722,37 @@ function wireAppointmentRequest() {
     const reason = document.getElementById("appointment-reason")?.value.trim();
 
     if (!selectedProvider || !patient || !date || !time) return;
+
+    if (usingDatabaseApi) {
+      try {
+        const response = await fetch(apiPath("appointments.php"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            patientId,
+            providerId: selectedProvider.id,
+            date,
+            time,
+            reason,
+          }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Unable to save appointment request.");
+
+        smartChartData.appointments = [
+          result.appointment,
+          ...smartChartData.appointments.filter((item) => item.id !== result.appointment.id),
+        ];
+        renderAppointments("patient", patientId);
+        status.textContent = `Appointment request saved to the database for ${patient.name} with ${selectedProvider.name}.`;
+        form.reset();
+        fillProviders();
+        return;
+      } catch (error) {
+        status.textContent = error.message;
+        return;
+      }
+    }
 
     const appointment = {
       id: `local-appointment-${Date.now()}`,
@@ -904,7 +935,7 @@ function wirePrescriptionSafetyCheck(defaultPatientId) {
   const revise = document.getElementById("revise-prescription");
   const override = document.getElementById("override-prescription");
 
-  const savePrescription = (overrideWarning = false) => {
+  const savePrescription = async (overrideWarning = false) => {
     const targetPatientId = prescriptionPatient?.value || defaultPatientId;
     const patient = getPatient(targetPatientId);
     const provider = smartChartData.providers[0] || { name: "Provider" };
@@ -916,6 +947,43 @@ function wirePrescriptionSafetyCheck(defaultPatientId) {
       status: status.value,
       startDate: startDate.value || "Pending",
     };
+
+    if (usingDatabaseApi) {
+      try {
+        const response = await fetch(apiPath("prescriptions.php"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            patientId: targetPatientId,
+            providerId: provider.id,
+            medication: medication.value,
+            dosage: dosage.value,
+            frequency: frequency.value,
+            status: status.value,
+            startDate: startDate.value,
+            endDate: document.getElementById("end-date")?.value || "",
+            overrideWarning,
+          }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Unable to save prescription.");
+
+        smartChartData.medications[targetPatientId] =
+          smartChartData.medications[targetPatientId] || [];
+        smartChartData.medications[targetPatientId].push(result.prescription);
+        warning.classList.add("hidden");
+        renderMedicationList(targetPatientId);
+        prescriptionStatus.textContent = overrideWarning
+          ? `Prescription saved to the database for ${patient.name} with provider override recorded.`
+          : `Prescription saved to the database for ${patient.name}.`;
+        form.reset();
+        if (prescriptionPatient) prescriptionPatient.value = targetPatientId;
+        populateMedicationOptions(targetPatientId);
+      } catch (error) {
+        prescriptionStatus.textContent = error.message;
+      }
+      return;
+    }
 
     smartChartData.medications[targetPatientId] =
       smartChartData.medications[targetPatientId] || [];

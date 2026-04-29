@@ -131,6 +131,7 @@ try {
 
     $medicationCatalog = array_map(
         fn($row) => [
+            'id' => (string) $row['med_id'],
             'name' => $row['drug_name'],
             'category' => $row['drug_class'] ?? '',
             'strength' => '',
@@ -188,4 +189,3 @@ try {
 } catch (Throwable $error) {
     send_json(['error' => $error->getMessage()], 500);
 }
-

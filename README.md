@@ -17,7 +17,6 @@ The application uses PHP endpoints to load and update data from MySQL, with HTML
 - Provider workflow for adding observations and prescriptions
 - Drug interaction warning support using medication interaction data
 - MySQL schema and load scripts based on the project dataset
-- Betaweb deployment using PHP and MySQL
 
 ## Technologies
 

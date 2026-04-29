@@ -1,8 +1,3 @@
-CSC 261 Database Project README file for Task C
-Group Members: Mahathir Khan and Laith Ali
-
-Files located in Task C Directory:
-
 create.sql -> creates sql tables of relations defined in milestone 2 schema. Two additional tables were created to encompass drug data ad drug0drug interaction data outlined in milestone 1.
 
 load.sql -> bulk loading file for data in cs project. Data is sourced from multiple csv files denoted below. 

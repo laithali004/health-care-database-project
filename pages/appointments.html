@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="brand">SmartChart</div>
+          <a class="nav-item" id="dashboard-link" href="patient.html?role=patient"
+            ><span class="nav-icon">▣</span>Dashboard</a
+          >
+          <a class="nav-item" id="profile-link" href="profile.html?role=patient"
+            ><span class="nav-icon">◌</span>Profile</a
+          >
+          <a
+            class="nav-item active"
+            id="appointments-link"
+            href="appointments.html?role=patient"
+            ><span class="nav-icon">🗓</span>Appointments</a
+          >
+          <a
+            class="nav-item"
+            id="flowsheets-link"
+            href="flowsheets.html?role=patient"
+            ><span class="nav-icon">📝</span>Flowsheets</a
+          >
+          <a class="nav-item" href="../index.html"
+            ><span class="nav-icon">⇦</span>Logout</a
+          >
+        </aside>
+        <main class="content">
+          <header class="page-header">
+            <h1>Appointments</h1>
+            <p>View upcoming visits and recent appointments.</p>
+          </header>
+
+          <section class="content-card">
+            <h2 id="appointments-heading">Upcoming Appointments</h2>
+            <div class="toolbar provider-only">
+              <label for="appointment-patient-filter">Patient</label>
+              <select id="appointment-patient-filter" data-patient-select></select>
+              <label for="appointment-provider-filter">Provider</label>
+              <select id="appointment-provider-filter"></select>
+            </div>
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Patient</th>
+                  <th>Provider</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody id="appointments-table"></tbody>
+            </table>
+          </section>
+
+          <section class="content-card patient-only stack-section">
+            <h2>Request Appointment</h2>
+            <form id="appointment-request-form" class="form-grid">
+              <label>
+                Specialty
+                <select id="appointment-specialty">
+                  <option value="Primary Care">Primary Care</option>
+                  <option value="Oncology">Oncology</option>
+                  <option value="Hematology">Hematology</option>
+                </select>
+              </label>
+              <label>
+                Provider
+                <select id="appointment-provider"></select>
+              </label>
+              <label>
+                Date
+                <input id="appointment-date" type="date" required />
+              </label>
+              <label>
+                Time
+                <input id="appointment-time" type="time" required />
+              </label>
+              <label class="full">
+                Reason for visit
+                <textarea id="appointment-reason" placeholder="Briefly describe what you need help with"></textarea>
+              </label>
+              <div class="form-actions">
+                <button type="submit">Request appointment</button>
+              </div>
+            </form>
+            <div id="appointment-request-status" class="notice"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

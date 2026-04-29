@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartChart - Provider View</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="brand">SmartChart</div>
+          <a
+            class="nav-item active"
+            id="dashboard-link"
+            href="provider.html?role=provider"
+            ><span class="nav-icon">🩺</span>Dashboard</a
+          >
+          <a
+            class="nav-item"
+            id="profile-link"
+            href="profile.html?role=provider"
+            ><span class="nav-icon">◌</span>Profile</a
+          >
+          <a
+            class="nav-item"
+            id="appointments-link"
+            href="appointments.html?role=provider"
+            ><span class="nav-icon">🗓</span>Appointments</a
+          >
+          <a
+            class="nav-item"
+            id="flowsheets-link"
+            href="flowsheets.html?role=provider"
+            ><span class="nav-icon">📝</span>Flowsheets</a
+          >
+          <a class="nav-item" href="../index.html"
+            ><span class="nav-icon">⇦</span>Logout</a
+          >
+        </aside>
+        <main class="content">
+          <h1 class="view-title" id="workspace-title">Provider View</h1>
+          <section class="panel patient-context">
+            <h3>Active Patient Context</h3>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="active-patient">Patient</label>
+                <select id="active-patient" data-patient-select></select>
+              </div>
+              <div class="info-line" id="active-context-note">
+                <span class="info-label">Access:</span>
+                Provider can switch between assigned patients.
+              </div>
+            </div>
+          </section>
+          <section class="top-grid">
+            <div class="photo-circle">Patient<br />Photo</div>
+            <div class="patient-name" id="dashboard-patient-name">Name</div>
+            <div class="info-card">
+              <h3>Contact Info</h3>
+              <div class="info-line">
+                <span class="info-label">Email:</span> <span id="dashboard-email">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">Phone:</span> <span id="dashboard-phone">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">Birthday:</span> <span id="dashboard-dob">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">MRN:</span> <span id="dashboard-mrn">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">Address:</span> <span id="dashboard-address">Loading...</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" style="margin-bottom: 18px">
+            <h3>Flowsheets</h3>
+            <div class="encounter-toolbar">
+              <span id="encounter-status" class="status-pill">Current encounter open</span>
+              <button type="button" id="finalize-encounter" class="clinical-only">Finalize encounter</button>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-head">Current Encounter</div>
+                <div class="metric-body">
+                  <ul class="metric-list" id="current-vitals-list">
+                    <li>Loading Task C observations...</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-head">
+                  Average Vitals of Last 5 Encounters
+                </div>
+                <div class="metric-body">
+                  <ul class="metric-list" id="average-vitals-list">
+                    <li>Loading Task C observations...</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dual-panels clinical-only">
+            <div class="form-card panel">
+              <h3>Add Observation</h3>
+              <form id="observation-form">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="observation-patient">Patient</label>
+                    <select id="observation-patient" data-patient-select></select>
+                  </div>
+                  <div class="form-field">
+                    <label for="observation-code">Observation Type</label>
+                    <select id="observation-code" required>
+                      <option value="Systolic Blood Pressure" data-unit="mm[Hg]" data-example="120">
+                        Systolic Blood Pressure
+                      </option>
+                      <option value="Diastolic Blood Pressure" data-unit="mm[Hg]" data-example="80">
+                        Diastolic Blood Pressure
+                      </option>
+                      <option value="Heart rate" data-unit="/min" data-example="76">
+                        Heart Rate
+                      </option>
+                      <option value="Respiratory rate" data-unit="/min" data-example="16">
+                        Respiratory Rate
+                      </option>
+                      <option value="Body Temperature" data-unit="Cel" data-example="37.0">
+                        Body Temperature
+                      </option>
+                      <option value="Oxygen saturation in Arterial blood" data-unit="%" data-example="98">
+                        Oxygen Saturation
+                      </option>
+                      <option value="Body Weight" data-unit="kg" data-example="72.5">
+                        Body Weight
+                      </option>
+                      <option value="Body Height" data-unit="cm" data-example="170.2">
+                        Body Height
+                      </option>
+                      <option value="Pain severity - 0-10 verbal numeric rating [Score]" data-unit="{score}" data-example="2">
+                        Pain Score
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label for="observation-value">Value</label>
+                    <input id="observation-value" type="text" placeholder="Example: 120" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="observation-unit">Unit</label>
+                    <input id="observation-unit" type="text" placeholder="Auto-filled from observation type" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="observation-time">Recorded At</label>
+                    <input id="observation-time" type="datetime-local" />
+                  </div>
+                </div>
+                <div class="button-row">
+                  <button type="submit">Save observation</button>
+                </div>
+              </form>
+              <div id="observation-status" class="notice"></div>
+              <div id="saved-observation-preview" class="saved-preview hidden"></div>
+            </div>
+
+            <div class="form-card panel">
+              <h3>Create Prescription</h3>
+              <form id="prescription-form">
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="prescription-patient">Patient</label>
+                    <select id="prescription-patient" data-patient-select></select>
+                  </div>
+                  <div class="form-field full">
+                    <label for="medication">Medication</label>
+                    <input
+                      id="medication"
+                      type="search"
+                      list="medication-options"
+                      placeholder="Search by medication name, e.g. Trioxsalen"
+                      autocomplete="off"
+                      required
+                    />
+                    <datalist id="medication-options"></datalist>
+                  </div>
+                  <div class="form-field">
+                    <label for="dosage">Dosage</label>
+                    <input id="dosage" type="text" placeholder="400 mg" />
+                  </div>
+                  <div class="form-field">
+                    <label for="frequency">Frequency</label>
+                    <input
+                      id="frequency"
+                      type="text"
+                      placeholder="Once daily"
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="status">Status</label>
+                    <select id="status">
+                      <option>Active</option>
+                      <option>Pending</option>
+                      <option>Stopped</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label for="start-date">Start Date</label>
+                    <input id="start-date" type="date" />
+                  </div>
+                  <div class="form-field">
+                    <label for="end-date">End Date</label>
+                    <input id="end-date" type="date" />
+                  </div>
+                </div>
+                <div class="button-row">
+                  <button type="submit" id="prescription-submit">Submit prescription</button>
+                </div>
+              </form>
+              <div id="interaction-warning" class="warning-box hidden">
+                <strong>Drug interaction warning:</strong>
+                <span id="interaction-message"></span>
+                <div class="button-row">
+                  <button type="button" id="revise-prescription">Revise</button>
+                  <button type="button" id="override-prescription">Override warning</button>
+                </div>
+              </div>
+              <div id="prescription-status" class="notice"></div>
+            </div>
+          </section>
+
+          <section class="panel table-wrap stack-section">
+            <h3>Selected Patient Medication List</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Medication</th>
+                  <th>Dosage</th>
+                  <th>Frequency</th>
+                  <th>Prescribed By</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="medication-list"></tbody>
+            </table>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

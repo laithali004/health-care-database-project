@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartChart - Login</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="login-page">
+        <div class="login-card">
+          <h1 class="login-brand">SmartChart</h1>
+          <h2>Login</h2>
+
+          <form id="login-form">
+            <div class="form-field">
+              <label for="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="Enter username"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="role">Role</label>
+              <select id="role" required>
+                <option value="patient">Patient</option>
+                <option value="provider">Provider</option>
+                <option value="admin">Admin Staff</option>
+              </select>
+            </div>
+
+            <div class="button-row">
+              <button type="submit">Login</button>
+            </div>
+          </form>
+
+          <div class="notice">Select a role to open the SmartChart workspace.</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

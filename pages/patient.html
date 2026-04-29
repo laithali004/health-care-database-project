@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartChart - Patient View</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="brand">SmartChart</div>
+          <a
+            class="nav-item active"
+            id="dashboard-link"
+            href="patient.html?role=patient"
+            ><span class="nav-icon">▣</span>Dashboard</a
+          >
+          <a class="nav-item" id="profile-link" href="profile.html?role=patient"
+            ><span class="nav-icon">◌</span>Profile</a
+          >
+          <a
+            class="nav-item"
+            id="appointments-link"
+            href="appointments.html?role=patient"
+            ><span class="nav-icon">🗓</span>Appointments</a
+          >
+          <a
+            class="nav-item"
+            id="flowsheets-link"
+            href="flowsheets.html?role=patient"
+            ><span class="nav-icon">📝</span>Flowsheets</a
+          >
+          <a class="nav-item" href="../index.html"
+            ><span class="nav-icon">⇦</span>Logout</a
+          >
+        </aside>
+        <main class="content">
+          <h1 class="view-title">Patient View</h1>
+          <section class="top-grid">
+            <div class="photo-circle">Patient<br />Photo</div>
+            <div class="patient-name" id="dashboard-patient-name">Name</div>
+            <div class="info-card">
+              <h3>Contact Info</h3>
+              <div class="info-line">
+                <span class="info-label">Email:</span> <span id="dashboard-email">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">Phone:</span> <span id="dashboard-phone">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">Birthday:</span> <span id="dashboard-dob">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">MRN:</span> <span id="dashboard-mrn">Loading...</span>
+              </div>
+              <div class="info-line">
+                <span class="info-label">Address:</span> <span id="dashboard-address">Loading...</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="dual-panels patient-dashboard-panels">
+            <div class="panel table-wrap medication-panel">
+              <h3>My Medication List</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Medication</th>
+                    <th>Frequency</th>
+                    <th>Prescribed By</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="medication-list"></tbody>
+              </table>
+              <div class="notice">
+                Patients can view active and past medications but cannot prescribe or edit them.
+              </div>
+            </div>
+
+            <div class="panel table-wrap encounter-panel">
+              <h3>Encounters</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Department</th>
+                    <th>Provider</th>
+                  </tr>
+                </thead>
+                <tbody id="encounter-list"></tbody>
+              </table>
+              <div class="notice">
+                Encounters are filtered to the signed-in patient.
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="layout">
+        <aside class="sidebar">
+          <div class="brand">SmartChart</div>
+          <a class="nav-item" id="dashboard-link" href="patient.html?role=patient"
+            ><span class="nav-icon">▣</span>Dashboard</a
+          >
+          <a class="nav-item active" id="profile-link" href="profile.html?role=patient"
+            ><span class="nav-icon">◌</span>Profile</a
+          >
+          <a
+            class="nav-item"
+            id="appointments-link"
+            href="appointments.html?role=patient"
+            ><span class="nav-icon">🗓</span>Appointments</a
+          >
+          <a
+            class="nav-item"
+            id="flowsheets-link"
+            href="flowsheets.html?role=patient"
+            ><span class="nav-icon">📝</span>Flowsheets</a
+          >
+          <a class="nav-item" href="../index.html"
+            ><span class="nav-icon">⇦</span>Logout</a
+          >
+        </aside>
+        <main class="content">
+        <header class="page-header">
+          <h1>Profile</h1>
+          <p id="profile-summary">Account details and access level.</p>
+        </header>
+
+        <section class="content-card profile-card">
+          <div class="profile-avatar" id="profile-avatar">◌</div>
+          <div class="profile-info">
+            <h2 id="profile-name">Profile</h2>
+            <p><strong>Role:</strong> <span id="profile-role"></span></p>
+            <p><strong>Access Level:</strong> <span id="profile-access"></span></p>
+            <p><strong>Member ID:</strong> <input id="profile-member-id" type="text" readonly /></p>
+            <p><strong>Email:</strong> <input id="profile-email" type="email" /></p>
+            <p><strong>Phone:</strong> <input id="profile-phone" type="text" /></p>
+            <p class="notice">Member ID is read-only to reflect access control rules.</p>
+          </div>
+        </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
